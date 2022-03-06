@@ -1,0 +1,37 @@
+.container{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    flex-direction: column ;
+    color: rgb(255, 255, 255);
+    height:50vh;
+    min-width:51vw;
+    background-color: rgb(8, 61, 105);
+    border-radius: 20px;
+    
+    
+}
+
+.login,.register{
+    text-decoration: none;
+    background-color: rgb(48, 46, 46);
+    padding: 0.7rem;
+    margin: 1rem;
+    border:none;
+    border-radius: 1rem;
+    color:rgb(255, 255, 255);
+    box-shadow: 1px black;
+    
+}
+.login:hover,.register:hover{
+    text-decoration: none;
+    background-color: rgb(180, 178, 178);
+    padding: 0.7rem;
+    margin: 1rem;
+    border:none;
+    border-radius: 1rem;
+    color:rgb(48, 48, 48);
+    box-shadow: 1px black;
+    
+}

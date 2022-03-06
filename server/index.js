@@ -2,23 +2,8 @@ const express = require("express");
 const app = express();
 const { MongoClient } = require("mongodb");
 const User = require("./db");
-
-
-const Joi=require("@hapi/joi");
-
-const validateSchema=Joi.object({
-    name:Joi.string().min(6),
-    email:Joi.string().min(6).email(),
-    password:Joi.string().allow("").min(6),
-    date:Joi.date(),
-    _id:Joi.object(),
-});
-
-
-
-
-
-
+const validate = require("./validate");
+const cors = require("cors");
 
 
 
@@ -38,7 +23,7 @@ async function Connect() {
     
 }
 
-Connect();
+// Connect();
 
 async function addUser(User){
 
@@ -59,7 +44,7 @@ async function addUser(User){
 const port = process.env.PORT || 8000;
 
 app.use(express.static('client'));
-
+app.use(cors());
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({extended:false}));
 
@@ -74,11 +59,14 @@ app.get('/', (req, res) => {
 });
 
 app.post('/register', (req, res) => {
-    // console.log(req);
+    console.log(req.body);
     
     
-    const validation = validateSchema.validate(req.body);
-    res.send(validation.error);
+    const {error} = validate.validate(req.body);
+    if(error)
+    res.json(error.details[0]?.message);
+    else
+    res.json("Successfully Registered.");
     
     
     const user = new User({
@@ -86,9 +74,8 @@ app.post('/register', (req, res) => {
         email: req.body.email,
         password: req.body.password[0],
     });
-    // console.log(user._id);
     // addUser(user);
-    res.send("Registered Successfully.");
+    // res.send("Registered Successfully.");
 
 })
 

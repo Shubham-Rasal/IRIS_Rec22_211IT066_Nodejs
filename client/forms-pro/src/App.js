@@ -5,6 +5,7 @@ import Register from './components/Register';
 import Login from './components/Login';
 import Dashboard from './components/dashboard/Dashboard';
 import Newform from './components/dashboard/Newform';
+import "./app.css"
 
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
                     <Route exact path="/" element={<First/>}/>
                     <Route  path="/login" element={<Login/>}/>
                     <Route  path="/register" element={<Register/>}/>
-                    <Route  path="/dashboard" element={<Dashboard/>}/>
+                    <Route  path="/dashboard" element={<Dashboard auth={false}/>}/>
                     <Route  path="/dashboard/newform" element={<Newform/>}/>
                  
 
