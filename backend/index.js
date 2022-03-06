@@ -2,7 +2,7 @@ const express = require("express");
 const app = express();
 const { MongoClient } = require("mongodb");
 const User = require("./db");
-const validate = require("../backend/validate");
+const validate = require("./validate");
 const cors = require("cors");
 
 

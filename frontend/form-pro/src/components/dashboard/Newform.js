@@ -1,11 +1,14 @@
 import React from 'react'
 
-const Newform = () => {
+const Newform = (props) => {
+
   return (
-    <div>
+      <>
       
+
+
       
-    </div>
+      </>
   )
 }
 
