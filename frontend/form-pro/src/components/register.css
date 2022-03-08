@@ -17,19 +17,7 @@ h1{
     min-width: 250px;
     
 }
-form{
-    display: flex;
-    justify-content: center;
-    justify-items: c;
-    flex-direction: column;
-    background-color: lightblue;
-    padding: 1rem;
-    border-radius: 10px;
-    height:70vh;
-   
-    min-width: 250px;
-    
-}
+
 
 input{
     display:flex;
