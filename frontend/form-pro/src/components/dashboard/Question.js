@@ -5,6 +5,7 @@ import {AiOutlineDelete} from "react-icons/ai"
 const Question = props => {
 
     const [show, setShow] = useState(true);
+    const [value, setValue] = useState("kqjhksjdfhskjf");
 
 
     function handleDeleteQuestion(){
@@ -15,22 +16,31 @@ const Question = props => {
         }
 
 
+
+        function handleChange(e)
+        {
+
+            // console.log(e.target.value)
+
+            setValue(e.target.value);
+
+
+
+
+        }
+
+
 return (
     <>{show?
    <div>
-       <li key={Math.random()*1000}>
+       <li >
            
 
            <div className="question">
-               <input type="text" name="question" id="question " placeholder='Enter question statement here:' />
+               <input type="text" name="question" id="question "  value={value} onChange={handleChange}  placeholder='Enter question statement here:' />
                
                </div>
-<div className="answer">
-    <textarea name="ans" id="ans" cols="50" rows="5" placeholder='Enter your answer here' >
-        </textarea>
-    
-    </div>
-      
+
        <AiOutlineDelete onClick={()=>handleDeleteQuestion()} className='rm-btn'   />
 
 

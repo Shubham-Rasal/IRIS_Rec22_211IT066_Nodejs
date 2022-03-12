@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import "./newform.css"
 import Question from './Question';
@@ -11,23 +11,18 @@ import { AiOutlineDelete } from "react-icons/ai"
 
 const Newform = () => {
 
-  const [count, setCount] = useState(1);
+  const [count, setCount] = useState([]);
 
-  const [questions, setQuestions] = useState([]);
   const [show, setshow] = useState(true);
+
+
+
+
 
 
   function handleAddQuestion() {
 
-   const ol = document.getElementById("ol");
-
-   console.log(ol);
-
-   ol
-
-
-    setQuestions([...questions, count]);
-
+    setCount([...count, Math.random()]);
 
   }
 
@@ -37,19 +32,78 @@ const Newform = () => {
 
     e.preventDefault();
 
-    const  formTitle = e.target[0].value;
-    const formDescription =e.target[1].value;
+    const formTitle = e.target[0].value;
+    const formDescription = e.target[1].value;
 
-    console.log(e.target);
+    // console.log(e.target);
 
     // console.log(formTitle,formDescription)
 
 
-   
-  }
+
+    var ol = document.getElementById("ol");
+
+    const children = ol.childNodes;
+    // console.log(ol.childNodes)
+
+    const questionList = [];
+    children.forEach(element => {
+      var qestionStatement = element.childNodes[0].firstChild.childNodes[0].value;
+
+
+     if(questionList.find(question=>question.questionStatement==qestionStatement))
+     {
+     console.log("Found");
+
+      return ;
+    }
+      
+
+      questionList.push({ questionStatement: qestionStatement });
+
+
+      console.log(qestionStatement)
+
+    });
+
+    // console.log(questionList);
 
 
 
+
+
+    async function sendToServer(options)
+    {
+      const response = await fetch('http://localhost:8000/form', options);
+
+    }
+
+    const data_to_send ={
+      formTitle:formTitle,
+      formDescription:formDescription,
+      formquestions:questionList
+    }
+
+    const options = {
+      method: 'POST',
+
+      body: JSON.stringify(data_to_send),
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+
+    sendToServer(options)
+
+
+
+
+
+
+
+
+
+}
 
 
   return (
@@ -68,9 +122,9 @@ const Newform = () => {
 
         <div className="questions">
 
-          <ol  id='ol'>
+          <ol id='ol'>
 
-            {questions.map((question, index) =>
+            {count.map((question, index) =>
 
 
 
@@ -78,23 +132,27 @@ const Newform = () => {
               <>
 
 
-                <Question key={Math.random()*2020} item={index} />
+                <Question item={index} />
 
 
               </>
             )
 
 
-            )}
+            )
+
+            }
 
           </ol>
 
         </div>
 
+
+
         <button type='button' className='add-btn' onClick={() => handleAddQuestion()}  >Add Question</button>
 
 
-       <input type="submit" value="Save Form" />
+        <input type="submit" value="Save Form" />
 
       </form>
 

@@ -80,5 +80,20 @@ app.post('/register', (req, res) => {
 })
 
 
+app.post('/form', (req, res) => {
+    console.log(req.body);
+
+
+    res.json("hello from server");
+    
+    
+  
+    
+    
+   
+
+})
+
+
 
 
