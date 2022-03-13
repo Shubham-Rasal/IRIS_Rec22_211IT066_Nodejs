@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import {useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import "./register.css"
 
 const Register = () => {
@@ -8,7 +8,7 @@ const Register = () => {
   const [confirm, setConfirm] = useState("");
   const [isSame, setIsSame] = useState("");
   const [error, setError] = useState("");
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   const handlePassword = (e) => {
     setPaas(e.target.value);
@@ -52,20 +52,38 @@ const Register = () => {
     };
     const response = await fetch('http://localhost:8000/register', options);
     const inputErr = await response.json();
-    if(inputErr)
-    setError(inputErr);
+    if (inputErr)
+      setError(inputErr);
     console.log(inputErr);
 
-    
-      
 
 
 
-
-    
-
+  }
 
 
+  function Goto() {
+
+
+    if (error == "Successfully Registered.") {
+
+      return (
+        <div>
+
+          <span>{error}</span>
+         <button className='goto' >Go to Login</button>
+        </div>
+      )
+
+
+    }
+    else {
+      return (
+        <span>
+          {error}
+        </span>
+      )
+    }
 
 
   }
@@ -76,41 +94,38 @@ const Register = () => {
 
 
   return (
-    <div>
+    <div className='register-form' >
       <h1>Register</h1>
       <div className="form">
-      <form name="form" onSubmit={handleSubmit}>
-        <label htmlFor="Username">Username</label>
-        <input type="text" id="Username" name="username" required />
-        <br />
-        <label htmlFor="Email">Email</label>
-        <input type="email" name="email" id="Email " placeholder='email' required /><br />
-        <label htmlFor="Password">Password</label>
-        <input type="text" id="Password" onChange={handlePassword} value={paas} name="password" required />
-        <br />
-        <label htmlFor="Password">Confirm Password</label>
-        <input type="text" id="Password" onChange={handleConfirmPassword} value={confirm} required />
-        <br />
-        <div className="password-match">{isSame}</div>
+        <form name="form" onSubmit={handleSubmit}>
+          <label htmlFor="Username">Username</label>
+          <input type="text" id="Username" name="username" required />
+          <br />
+          <label htmlFor="Email">Email</label>
+          <input type="email" name="email" id="Email " placeholder='email' required /><br />
+          <label htmlFor="Password">Password</label>
+          <input type="text" id="Password" onChange={handlePassword} value={paas} name="password" required />
+          <br />
+          <label htmlFor="Password">Confirm Password</label>
+          <input type="text" id="Password" onChange={handleConfirmPassword} value={confirm} required />
+          <br />
+          <div className="password-match">{isSame}</div>
 
-        <button type="submit" value="submit"  >
-          Submit
-        </button>
+          <button type="submit" value="submit"  >
+            Submit
+          </button>
 
-      </form>
+        </form>
       </div>
 
 
-      <span>{error}
+
+
+      <span>
+
+        <Goto />
 
       </span>
-
-
-
-      
-
-
-
 
     </div>
   )
