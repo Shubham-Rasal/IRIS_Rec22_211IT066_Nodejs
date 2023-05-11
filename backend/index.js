@@ -6,12 +6,7 @@ const validate = require("./validate");
 const cors = require("cors");
 const { boolean } = require("@hapi/joi");
 
-
-
-
-
-
-const dbURL = "mongodb+srv://shubham:shubham123@forms-pro.g4unt.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const dbURL = "mongodb+srv://shubham:shubham123@forms-pro.g4unt.mongodb.net/?retryWrites=true&w=majority";
 
 
 const client = new MongoClient(dbURL, { useNewUrlParser: true });
